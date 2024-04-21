@@ -1,5 +1,6 @@
 package com.example.service.http;
 
+import com.example.service.filter.MyFilter;
 import com.example.service.http.utils.log.Log;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
@@ -11,7 +12,9 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.reflections.Reflections;
 
+import javax.servlet.DispatcherType;
 import javax.ws.rs.Path;
+import java.util.EnumSet;
 import java.util.Set;
 
 public class HttpMgr {
@@ -48,6 +51,9 @@ public class HttpMgr {
             // TODO 3. 建立 Jetty Handler
             ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.NO_SESSIONS); // NO_SESSIONS，表示每個 HTTP 請求都將是無狀態
             contextHandler.setContextPath("/");
+
+            // 加入過濾器
+            contextHandler.addFilter(MyFilter.class, "/*", EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
 
             // 使用 Reflections 找到带有 @Path 註解的類別
             Set<Class<?>> classes = new Reflections().getTypesAnnotatedWith(Path.class);
