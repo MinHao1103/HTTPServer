@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "8d418a0b-6e08-489b-af9f-2650929b8877",
+		"name": "HTTPServer_Jetty_Jersey",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26469706"
+	},
+	"item": [
+		{
+			"name": "APlusB",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:18080/HTTPServer/api/v1/APlusB?a=10&b=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"HTTPServer",
+						"api",
+						"v1",
+						"APlusB"
+					],
+					"query": [
+						{
+							"key": "a",
+							"value": "10"
+						},
+						{
+							"key": "b",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AMinusB",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:18080/HTTPServer/api/v1/AMinusB?a=10&b=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"HTTPServer",
+						"api",
+						"v1",
+						"AMinusB"
+					],
+					"query": [
+						{
+							"key": "a",
+							"value": "10"
+						},
+						{
+							"key": "b",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
