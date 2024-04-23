@@ -7,12 +7,12 @@
 	},
 	"item": [
 		{
-			"name": "APlusB",
+			"name": "AdditionPlugin",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:18080/HTTPServer/api/v1/APlusB?a=10&b=5",
+					"raw": "http://localhost:18080/HTTPServer/v1/AdditionPlugin?a=10&b=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -20,9 +20,8 @@
 					"port": "18080",
 					"path": [
 						"HTTPServer",
-						"api",
 						"v1",
-						"APlusB"
+						"AdditionPlugin"
 					],
 					"query": [
 						{
@@ -39,12 +38,12 @@
 			"response": []
 		},
 		{
-			"name": "AMinusB",
+			"name": "SubtractionPlugin",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:18080/HTTPServer/api/v1/AMinusB?a=10&b=5",
+					"raw": "http://localhost:18080/HTTPServer/v1/SubtractionPlugin?a=10&b=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -52,9 +51,8 @@
 					"port": "18080",
 					"path": [
 						"HTTPServer",
-						"api",
 						"v1",
-						"AMinusB"
+						"SubtractionPlugin"
 					],
 					"query": [
 						{
@@ -71,12 +69,12 @@
 			"response": []
 		},
 		{
-			"name": "AMultiplyB",
+			"name": "MultiplicationPlugin",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:18080/HTTPServer/api/v1/AMultiplyB?a=10&b=5",
+					"raw": "http://localhost:18080/HTTPServer/v1/MultiplicationPlugin?a=10&b=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -84,9 +82,8 @@
 					"port": "18080",
 					"path": [
 						"HTTPServer",
-						"api",
 						"v1",
-						"AMultiplyB"
+						"MultiplicationPlugin"
 					],
 					"query": [
 						{
@@ -103,12 +100,12 @@
 			"response": []
 		},
 		{
-			"name": "ADivideB",
+			"name": "DivisionPlugin",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:18080/HTTPServer/api/v1/ADivideB?a=10&b=5",
+					"raw": "http://localhost:18080/HTTPServer/v1/DivisionPlugin?a=10&b=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -116,9 +113,8 @@
 					"port": "18080",
 					"path": [
 						"HTTPServer",
-						"api",
 						"v1",
-						"ADivideB"
+						"DivisionPlugin"
 					],
 					"query": [
 						{

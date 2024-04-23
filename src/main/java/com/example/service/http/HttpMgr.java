@@ -1,6 +1,7 @@
 package com.example.service.http;
 
 import com.example.service.filter.MyFilter;
+import com.example.service.http.servlet.calculator.CalculatorPlugin;
 import com.example.service.http.utils.log.Log;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
@@ -14,7 +15,9 @@ import org.reflections.Reflections;
 
 import javax.servlet.DispatcherType;
 import javax.ws.rs.Path;
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 public class HttpMgr {
@@ -55,16 +58,30 @@ public class HttpMgr {
             // 加入過濾器
             contextHandler.addFilter(MyFilter.class, "/*", EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
 
-            // 使用 Reflections 找到带有 @Path 註解的類別
-            Set<Class<?>> classes = new Reflections().getTypesAnnotatedWith(Path.class);
             ResourceConfig resourceConfig = new ResourceConfig(); // 建立 Jersey 的 ResourceConfig
+
+            Log.d(TAG, "Using Reflections to find subclasses of CalculatorPlugin.");
+            List<Class<?>> serviceClasses = new ArrayList<>(new Reflections().getSubTypesOf(CalculatorPlugin.class));
+            for (Class<?> cl : serviceClasses) {
+                try {
+                    resourceConfig.register(cl);
+                } catch (Exception e) {
+                    Log.d(TAG, e.getMessage());
+                }
+            }
+            Log.d(TAG, "Finished finding subclasses of CalculatorPlugin using Reflections.");
+
+            Log.d(TAG, "Using Reflections to find classes annotated with @Path.");
+            Set<Class<?>> classes = new Reflections().getTypesAnnotatedWith(Path.class);
             for (Class<?> clazz : classes) {
                 String packageName = clazz.getPackage().getName();
-                resourceConfig.packages(packageName); // 每個類別的套件名稱加到 Jersey 的 ResourceConfig 中，讓 Jersey 能夠掃描處理這些類別
+                resourceConfig.packages(packageName); // 告訴 Jersey 掃描處理類別
             }
-            ServletHolder jerseyServlet = new ServletHolder(new ServletContainer(resourceConfig)); // 建立 Jersey 的 ServletHolder，配置 ResourceConfig
-            contextHandler.addServlet(jerseyServlet, "/HTTPServer/api/*"); // Jersey Servlet 將處理 /HTTPServer/api/*
-            server.setHandler(contextHandler);
+            Log.d(TAG, "Finished finding classes annotated  with @Path using Reflections.");
+
+            // 建立 Jersey 的 ServletHolder 配置 ResourceConfig，讓 Jersey 處理 /HTTPServer/* 開頭的 URL
+            contextHandler.addServlet(new ServletHolder(new ServletContainer(resourceConfig)), "/HTTPServer/*");
+            server.setHandler(contextHandler); // 將配置好的 contextHandler 加入 server
 
             // TODO 4. 啟動 Jetty Server
             startJettyServer();
